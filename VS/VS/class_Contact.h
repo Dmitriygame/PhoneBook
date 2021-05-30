@@ -4,7 +4,7 @@
 class Contact {
 public:
 	Contact();
-	Contact(int tmp_id);
+	Contact(int tmp_id, std::string tmp_name, std::string tmp_num);
 	~Contact();
 	int get_id();
 	std::string get_number();
@@ -12,9 +12,8 @@ public:
 
 	friend class Book;
 
-	std::string number = "11111";	//!!!
 private:
 	int id;
-	std::string /*number="11111",*/ name;	//!!!
-};
+	std::string number, name;
 
+};
