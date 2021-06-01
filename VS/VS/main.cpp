@@ -1,4 +1,4 @@
-﻿#include <iostream>
+#include <iostream>
 #include <cstdlib>
 
 #include "class_Book.h"
@@ -7,14 +7,11 @@
 using namespace std;
 
 Book book;
+Contact* ptr;
 
 bool output = false;
 int input;
-int value;
 string value1, value2;
-
-Contact* ptr;
-
 
 int main() {
 
@@ -32,8 +29,7 @@ int main() {
 		else {
 			for (int i = 1; i <= book.quantity(); i++) {
 				*ptr = book.get_obj(i-1);
-				cout << i << "\t" << ptr->get_name() << "\t\t" << ptr->get_number();
-				cout << endl;
+				cout << i << "\t" << ptr->get_name() << "\t\t" << ptr->get_number() << endl;
 			}
 			cout << "\n\n";
 		}
@@ -48,18 +44,22 @@ int main() {
 				cout << "Input number: ";
 				cin >> value2;
 				book.set_last_id();
-				ptr = new Contact(book.get_last_id(), value1, value2);
+				ptr = new Contact(value1, value2);
 				book.add_ptrlog(ptr);
 				break;
 			}
 			case 2: {
-				cout << "Input contact number: ";
-				cin >> value;
-				book.remove_from_ptrLog(value-1);
+				cout << "\nEnter the contact's serial number: ";
+				cin >> input;
+				if ((input <= book.quantity())  && (input > 0))
+					book.remove_from_ptrLog(input-1);
 				break;
 			}
 			case 3: {
-				// in process...
+				cout << "\nInput key word: ";
+				cin >> value1;
+				cout << book.search(value1) << "\n\n";
+				system("pause");
 				break;
 			}
 			case 4: {
@@ -67,11 +67,8 @@ int main() {
 				break;
 			}
 		}
-
 		system("cls");
-
 	}
 	delete ptr;
-//	book.clear_ptrLog();
 	return 0;
 }

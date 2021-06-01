@@ -6,22 +6,6 @@ Book::Book() {
 
 Book::~Book() {}
 
-int Book::get_id(Contact& contact) {
-	return contact.id;
-}
-
-void Book::set_number(Contact& contact, std::string tmp_num) {
-	contact.number = tmp_num;
-}
-
-std::string Book::get_number(Contact& contact) {
-	return contact.number;
-}
-
-int Book::get_last_id() {
-	return this->last_id;
-}
-
 void Book::set_last_id() {
 	this->last_id++;
 }
@@ -40,10 +24,25 @@ int Book::quantity() {
 
 std::string Book::search(std::string value) {
 	std::string result;
-	for (int i = 1; i <= Book::quantity(); i++) {
-		*ptr = book.get_obj(i - 1);		//in process...
-		cout << i << "\t" << ptr->get_name() << "\t\t" << ptr->get_number();//in process...
-		cout << endl;//in process...
+	if (Book::quantity() > 0) {
+	
+		for (int i = 0; i < Book::quantity(); i++) {
+			Contact* ptr;
+			ptr = new Contact;
+			*ptr = get_obj(i);
+			if (( ptr->get_name() == value) || ( ptr->get_number() == value)) {
+				result = "    " + ptr->get_name() + "    " + ptr->get_number();
+				break;
+			}
+			else {
+				result = "Nothing was found";
+			}
+			delete ptr;
+		}
+		
+	}
+	else {
+		result = "Your contacts list is empty";
 	}
 	return result;
 }
@@ -51,12 +50,3 @@ std::string Book::search(std::string value) {
 Contact Book::get_obj(int tmp_id) {
 	return ptrLog[tmp_id];
 }
-/*
-void Book::clear_ptrLog() {
-	Contact* ptr;
-	for (int i = 0; i <= last_id; i++) {
-		*ptr = ptrLog[i];
-		delete ptr;
-	}
-}
-*/

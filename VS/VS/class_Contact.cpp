@@ -2,8 +2,7 @@
 
 Contact::Contact() {}
 
-Contact::Contact(int tmp_id, std::string tmp_name, std::string tmp_num) {
-	this->id = tmp_id;
+Contact::Contact(std::string tmp_name, std::string tmp_num) {
 	this->name = tmp_name;
 	this->number = tmp_num;
 }
